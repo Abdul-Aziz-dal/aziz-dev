@@ -7,8 +7,6 @@ import {
   Menu,
   X,
   FileText,
-  Sparkles,
-  Phone,
   Mail,
   Check,
   Copy,
@@ -37,26 +35,25 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: "Overview", href: "#overview" },
+    { label: "About", href: "#about" },
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
-    { label: "AI Simulator", href: "#ai-demo" },
-    { label: "Architecture", href: "#architecture" },
-    { label: "Skills", href: "#skills" },
+    { label: "AI Case Study", href: "#ai-case-study" },
+    { label: "Tech Stack", href: "#skills" },
     { label: "Contact", href: "#contact" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "bg-[#07090e]/85 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/30 py-3"
-          : "bg-transparent py-5"
+          ? "bg-[#090b11]/90 backdrop-blur-md border-b border-slate-800/80 shadow-sm shadow-black/20 py-3"
+          : "bg-transparent py-4 sm:py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand / Name */}
+          {/* Brand / Photo & Name */}
           <Link
             href="/"
             className="flex items-center gap-3 group focus:outline-none"
@@ -65,17 +62,19 @@ export default function Navbar() {
               <img
                 src="/abdul-aziz-dal.jpg"
                 alt="Abdul Aziz Dal"
-                className="w-10 h-10 rounded-xl object-cover ring-2 ring-cyan-500/40 group-hover:ring-cyan-400 transition-all shadow-md shadow-cyan-500/20 group-hover:scale-105"
+                className="w-10 h-10 rounded-full object-cover ring-2 ring-slate-700 group-hover:ring-cyan-500 transition-all"
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-[#07090e] rounded-full" />
+              <span
+                className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-[#090b11] rounded-full"
+                title="Available for opportunities"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-slate-100 group-hover:text-cyan-400 transition-colors text-base tracking-tight">
+                <span className="font-semibold text-slate-100 group-hover:text-cyan-400 transition-colors text-sm sm:text-base">
                   Abdul Aziz Dal
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   Available
                 </span>
               </div>
@@ -86,12 +85,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-slate-900/60 p-1 rounded-full border border-slate-800">
+          <nav className="hidden md:flex items-center gap-1 bg-slate-900/70 px-3 py-1.5 rounded-full border border-slate-800/80">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all"
+                className="px-3 py-1 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 {link.label}
               </a>
@@ -102,7 +101,7 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center gap-2.5">
             <button
               onClick={handleCopyEmail}
-              className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 transition-colors"
               title="Click to copy email address"
             >
               {copiedEmail ? (
@@ -120,27 +119,27 @@ export default function Navbar() {
 
             <Link
               href="/resume"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-sm shadow-cyan-500/25 transition-all hover:scale-105"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-cyan-600 hover:bg-cyan-500 text-white shadow-sm transition-colors"
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>Resume / CV</span>
+              <span>Resume</span>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white focus:outline-none"
+            className="md:hidden p-2 rounded-lg bg-slate-800/80 text-slate-300 hover:text-white focus:outline-none"
             aria-label="Toggle Menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0a0e17]/95 border-b border-slate-800 px-4 pt-3 pb-6 mt-3 space-y-3 backdrop-blur-xl">
+        <div className="md:hidden bg-[#0d1017] border-b border-slate-800 px-4 pt-3 pb-6 mt-3 space-y-3 shadow-xl">
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => (
               <a
@@ -159,10 +158,10 @@ export default function Navbar() {
             <Link
               href="/resume"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 text-white flex items-center justify-center gap-2"
+              className="w-full text-center py-2.5 rounded-lg text-xs font-semibold bg-cyan-600 text-white flex items-center justify-center gap-2"
             >
               <FileText className="w-4 h-4" />
-              <span>View Full Resume (Print Ready)</span>
+              <span>View Resume (Print Ready)</span>
             </Link>
 
             <a

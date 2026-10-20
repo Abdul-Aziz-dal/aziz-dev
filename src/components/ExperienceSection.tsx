@@ -1,151 +1,135 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { EXPERIENCES } from "@/data/portfolioData";
 import {
   Briefcase,
   Calendar,
   MapPin,
-  ChevronRight,
-  ExternalLink,
   CheckCircle2,
-  Sparkles,
   Building2,
   Layers,
+  ArrowUpRight,
 } from "lucide-react";
 
 export default function ExperienceSection() {
-  const [activeExpId, setActiveExpId] = useState<string>("verge");
-
-  const currentExp = EXPERIENCES.find((e) => e.id === activeExpId)!;
-
   return (
-    <section id="experience" className="py-20 md:py-28 bg-[#090d16] border-t border-slate-800/80 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-16 md:py-24 bg-[#07090e] border-b border-slate-800/80">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-4">
-            <Briefcase className="w-3.5 h-3.5" />
-            <span>Career Milestones</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        <div className="max-w-2xl mb-14">
+          <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider block mb-2">
+            Work History
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Professional Experience & Track Record
           </h2>
-          <p className="mt-3 text-slate-400 text-base sm:text-lg">
-            5+ years of delivering high-impact, enterprise-grade software products in human capital management, applicant tracking, and merchandising.
+          <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
+            Over 5 years of full-stack engineering, building enterprise HRMS software, AI applicant tracking systems, and cloud-native merchandising platforms.
           </p>
         </div>
 
-        {/* Experience Navigation Tabs (Desktop & Mobile) */}
-        <div className="flex flex-wrap gap-2.5 justify-center mb-10">
-          {EXPERIENCES.map((exp) => (
-            <button
+        {/* Timeline List (Linear, Highly Readable & Editorial) */}
+        <div className="space-y-12">
+          {EXPERIENCES.map((exp, idx) => (
+            <div
               key={exp.id}
-              onClick={() => setActiveExpId(exp.id)}
-              className={`px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2.5 ${
-                activeExpId === exp.id
-                  ? "bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/20 scale-[1.02]"
-                  : "bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800"
-              }`}
+              className="relative pl-6 sm:pl-8 border-l-2 border-slate-800 space-y-6"
             >
-              <Building2 className="w-4 h-4" />
-              <span>{exp.company}</span>
-              {exp.status && (
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  {exp.status}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+              {/* Timeline Dot */}
+              <div
+                className={`absolute -left-[9px] top-1.5 w-4 h-4 rounded-full border-2 ${
+                  exp.status
+                    ? "bg-cyan-500 border-cyan-300"
+                    : "bg-slate-800 border-slate-600"
+                }`}
+              />
 
-        {/* Active Experience Card */}
-        <div className="rounded-2xl bg-[#0b0f19] border border-slate-800 shadow-xl overflow-hidden p-6 sm:p-8">
-          {/* Header Row */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="text-2xl font-bold text-white">{currentExp.role}</h3>
-                {currentExp.status && (
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                    {currentExp.status}
-                  </span>
-                )}
-              </div>
-              <div className="text-lg font-semibold text-cyan-400 mt-0.5">
-                {currentExp.company}
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
-              <span className="inline-flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
-                <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                {currentExp.period}
-              </span>
-              <span className="inline-flex items-center gap-1.5 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
-                <MapPin className="w-3.5 h-3.5 text-rose-400" />
-                {currentExp.location}
-              </span>
-            </div>
-          </div>
-
-          {/* Summary */}
-          <p className="py-5 text-sm sm:text-base text-slate-300 leading-relaxed border-b border-slate-800/80">
-            {currentExp.summary}
-          </p>
-
-          {/* Products Breakdown */}
-          <div className="pt-6 space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-cyan-400" />
-              Core Products & Technical Contributions:
-            </h4>
-
-            <div className="space-y-6">
-              {currentExp.products.map((prod, pIdx) => (
-                <div
-                  key={pIdx}
-                  className="p-5 sm:p-6 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition-all space-y-4"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <h5 className="text-lg font-bold text-white flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                      {prod.name}
-                    </h5>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    {prod.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {prod.technologies.map((t, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800/90 text-cyan-300 border border-slate-700/60"
-                      >
-                        {t}
+              {/* Company & Role Header */}
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">
+                      {exp.role}
+                    </h3>
+                    {exp.status && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+                        {exp.status}
                       </span>
-                    ))}
+                    )}
                   </div>
-
-                  {/* Achievements List */}
-                  <div className="space-y-2 pt-2">
-                    {prod.achievements.map((ach, aIdx) => (
-                      <div key={aIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span>{ach}</span>
-                      </div>
-                    ))}
+                  <div className="flex items-center gap-3 text-xs text-slate-400">
+                    <span className="inline-flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                      {exp.period}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                      {exp.location}
+                    </span>
                   </div>
                 </div>
-              ))}
+
+                <div className="text-base font-semibold text-cyan-400">
+                  {exp.company}
+                </div>
+              </div>
+
+              {/* Context Summary */}
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                {exp.summary}
+              </p>
+
+              {/* Products Breakdown */}
+              <div className="space-y-5 pt-2">
+                {exp.products.map((prod, pIdx) => (
+                  <div
+                    key={pIdx}
+                    className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition-colors space-y-3.5"
+                  >
+                    <div>
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h4 className="text-base font-bold text-white flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                          {prod.name}
+                        </h4>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-1">
+                        {prod.description}
+                      </p>
+                    </div>
+
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {prod.technologies.map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-800 text-slate-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Achievements List */}
+                    <div className="space-y-1.5 pt-1">
+                      {prod.achievements.map((ach, aIdx) => (
+                        <div
+                          key={aIdx}
+                          className="flex items-start gap-2 text-xs sm:text-sm text-slate-300 leading-relaxed"
+                        >
+                          <span className="text-cyan-400 font-bold shrink-0 mt-0.5">•</span>
+                          <span>{ach}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-

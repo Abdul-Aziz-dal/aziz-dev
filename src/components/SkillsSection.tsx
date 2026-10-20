@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { SKILL_CATEGORIES } from "@/data/portfolioData";
 import {
-  Cpu,
   Layout,
   Server,
   Database,
@@ -11,8 +10,6 @@ import {
   BrainCircuit,
   Wrench,
   Search,
-  CheckCircle,
-  Sparkles,
 } from "lucide-react";
 
 export default function SkillsSection() {
@@ -21,51 +18,52 @@ export default function SkillsSection() {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
       case "Layout":
-        return <Layout className="w-5 h-5 text-cyan-400" />;
+        return <Layout className="w-4 h-4 text-cyan-400" />;
       case "Server":
-        return <Server className="w-5 h-5 text-indigo-400" />;
+        return <Server className="w-4 h-4 text-indigo-400" />;
       case "Database":
-        return <Database className="w-5 h-5 text-emerald-400" />;
+        return <Database className="w-4 h-4 text-emerald-400" />;
       case "Cloud":
-        return <Cloud className="w-5 h-5 text-amber-400" />;
+        return <Cloud className="w-4 h-4 text-amber-400" />;
       case "BrainCircuit":
-        return <BrainCircuit className="w-5 h-5 text-rose-400" />;
+        return <BrainCircuit className="w-4 h-4 text-rose-400" />;
       default:
-        return <Wrench className="w-5 h-5 text-sky-400" />;
+        return <Wrench className="w-4 h-4 text-sky-400" />;
     }
   };
 
   return (
-    <section id="skills" className="py-20 md:py-28 bg-[#090d16] border-t border-slate-800/80 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
-            <Cpu className="w-3.5 h-3.5" />
-            <span>Technical Capabilities</span>
+    <section id="skills" className="py-16 md:py-24 bg-[#07090e] border-b border-slate-800/80">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header & Filter */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="max-w-xl">
+            <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider block mb-2">
+              Technical Proficiencies
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Tools & Technologies I Work With
+            </h2>
+            <p className="mt-2 text-slate-300 text-sm sm:text-base leading-relaxed">
+              Every tool in this stack has been tested in high-concurrency production environments across HRMS, ATS, and cloud applications.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Comprehensive Skills & Technologies
-          </h2>
-          <p className="mt-3 text-slate-400 text-base sm:text-lg">
-            Battle-tested across production enterprise platforms, AWS cloud services, and real-world LLM pipelines.
-          </p>
 
-          {/* Quick Search Filter */}
-          <div className="mt-6 max-w-md mx-auto relative">
+          {/* Clean Search Input */}
+          <div className="w-full md:w-72 relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search skill (e.g. Next.js, Redis, AWS, PHP, LLM)..."
+              placeholder="Search skill (e.g. Next.js, Redis, PHP)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
             />
           </div>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 6 Grid Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {SKILL_CATEGORIES.map((category, idx) => {
             const filteredSkills = searchQuery
               ? category.skills.filter((s) =>
@@ -78,54 +76,41 @@ export default function SkillsSection() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl bg-[#0b0f19] border border-slate-800 p-6 flex flex-col justify-between hover:border-slate-700 transition-all shadow-lg"
+                className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800/90 hover:border-slate-700 transition-colors flex flex-col justify-between"
               >
                 <div>
-                  {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">
                       {getCategoryIcon(category.iconName)}
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-white">
+                      <h3 className="text-sm font-bold text-white">
                         {category.title}
                       </h3>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-[11px] text-slate-400">
                         {category.description}
                       </p>
                     </div>
                   </div>
 
-                  {/* Skills List */}
-                  <div className="mt-4 space-y-2">
+                  <div className="space-y-1.5 mt-3">
                     {filteredSkills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 border border-slate-800/80 text-xs"
+                        className="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 text-xs"
                       >
                         <span className="font-medium text-slate-200">
                           {skill.name}
                         </span>
 
-                        <div className="flex items-center gap-1.5">
-                          {skill.badge && (
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-cyan-950 text-cyan-300 border border-cyan-800/40">
-                              {skill.badge}
-                            </span>
-                          )}
-                          <span className="text-[11px] text-slate-400">
-                            {skill.level}
+                        {skill.badge && (
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-800 text-cyan-300">
+                            {skill.badge}
                           </span>
-                        </div>
+                        )}
                       </div>
                     ))}
                   </div>
-                </div>
-
-                {/* Footer status */}
-                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-                  <span>{filteredSkills.length} Verified Proficiencies</span>
-                  <span className="text-emerald-400 font-medium">Production Tested</span>
                 </div>
               </div>
             );
@@ -135,4 +120,3 @@ export default function SkillsSection() {
     </section>
   );
 }
-
